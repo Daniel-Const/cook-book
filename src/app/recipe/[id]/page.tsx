@@ -1,4 +1,7 @@
 "use client";
+
+import Layout from "@/components/layout/Layout";
+
 /**
  * Recipe page
  */
@@ -15,12 +18,12 @@ export default function Page({ params }: { params: { id: string } }) {
     ],
   };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <Layout>
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm">
         <h1 className="text-6xl">{recipe.title}</h1>
         <p className="pt-10">{recipe.description}</p>
         <h2 className="text-4xl pt-10">Ingredients</h2>
       </div>
-    </main>
+    </Layout>
   );
 }
