@@ -15,9 +15,12 @@ export default function RecipeCard({
   imgSrc: string;
 }) {
   const currentPath = usePathname();
+  const hoverStyle = {
+    'border-color': 'white'
+  };
   return (
     <Link href={`${currentPath}/${id}`}>
-      <div className="outline grid grid-rows-3 grid-flow-col gap-4 p-4 m-4">
+      <div className="outline grid grid-rows-3 grid-flow-col gap-4 p-4 m-4 hover:outline-blue-500">
         <div className="row-span-3">
           <h1>{title}</h1>
           <p>{description}</p>

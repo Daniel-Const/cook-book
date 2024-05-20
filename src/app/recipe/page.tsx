@@ -8,7 +8,7 @@ import RecipeCard from "@/components/recipe/RecipeCard";
 export default function Home() {
   return (
     <Layout>
-      <h1 className="text-xl text-center">Recipes</h1>
+      <h1 className="text-5xl text-center">Recipes</h1>
       <div className="z-10 w-full max-w-5xl items-center font-mono text-sm">
         <div className="grid p-2">
           <RecipeCard
