@@ -4,6 +4,7 @@
 
 'use client'
 
+import { Alert, AlertType } from "@/components/layout/Alert";
 import Layout from "@/components/layout/Layout"
 import { AddButton } from "@/components/recipe/AddButton";
 import RecipeCard from "@/components/recipe/RecipeCard";
