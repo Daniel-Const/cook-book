@@ -1,20 +1,25 @@
-import { Alert, AlertType } from "./Alert";
+'use client'
+
+import { useContext } from "react";
+import { Alert } from "./Alert";
 import { BackButton } from "./BackButton"
+import { AlertContext } from "@/context/AlertContext";
 
 export default function Layout({ children, showBack = true }: Readonly<{ children: React.ReactNode; showBack?: boolean }>) {
-/*            <div className="bg-green-100 flex">
-                <div className=""><button className="text-black rounded-full bg-blue-400 p-2">back</button></div>
-                <div className="flex mx-auto items-center"><p className="bg-slate-500">Potato!</p></div>
-            </div>
-            */
+    const alertCtx = useContext(AlertContext);
     return (
         <div>
-           <div className="m-8 flex">
+            <div className="m-8 flex">
                 <div className="flex items-center">
                     {showBack ? <BackButton></BackButton> : ""}
                 </div>
+
                 <div className="flex mx-auto items-center">
-                    <Alert type={AlertType.Info}></Alert>
+                    {
+                        alertCtx?.show
+                            ? <Alert type={alertCtx.type} message={alertCtx.message} />
+                            : ""
+                    }
                 </div>
             </div>
 
@@ -24,5 +29,4 @@ export default function Layout({ children, showBack = true }: Readonly<{ childre
         </div>
     )
 }
-
 

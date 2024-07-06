@@ -1,11 +1,15 @@
 'use client'
 
-import { FormEvent } from 'react'
+import { FormEvent, useContext } from 'react'
+import { useRouter } from "next/navigation"
 
-import Layout from "@/components/layout/Layout"
 import ListInput from './ListInput'
+import { AlertContext, AlertType } from '@/context/AlertContext';
 
 export default function CreateRecipe() {
+    const router = useRouter()
+
+    const alertContext = useContext(AlertContext);
 
     async function onSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -22,14 +26,16 @@ export default function CreateRecipe() {
         }
 
         const method = formData.get("method")
-        
+
         // TODO: API Request to save recipe
         // On save -> Check status of request, trigger alert and go back to recipe list
-        console.log({title, ingredients, method})
+        console.log({ title, ingredients, method })
+        router.push("/recipe")
+        alertContext?.trigger(AlertType.Info, "Succesfully created new recipe!")
     }
 
     return (
-        <Layout>
+        <>
             <h1 className="text-2xl">Add a recipe!</h1>
             <form onSubmit={onSubmit}>
                 <div className="flex-row">
@@ -38,8 +44,8 @@ export default function CreateRecipe() {
                         <input className="text-black pl-2" type="text" id="title" name="title" />
                     </div>
                     <div className="mt-8">
-                       <label className="block mb-2 text-sm font-medium text-white">Ingredients</label>
-                       <ListInput />
+                        <label className="block mb-2 text-sm font-medium text-white">Ingredients</label>
+                        <ListInput />
                     </div>
                     <div className="mt-8">
                         <label className="block mb-2 text-sm font-medium text-white">Method</label>
@@ -52,6 +58,6 @@ export default function CreateRecipe() {
                     </div>
                 </div>
             </form>
-        </Layout>
-    )    
+        </>
+    )
 }

@@ -13,17 +13,17 @@ export default function ListInput() {
 
     return (
         <>
-        <ul>
-            {inputs.map((key, index) => (
-                <li key={index}>
-                    <div className="pb-2">
-                        <input className="pl-2 text-black" type="text" name={"list-"+index} id={key} placeholder={key} />
-                    </div>
-                </li>
-            ))}
-        </ul>
-        <br />
-        <button className="rounded-full outline p-2" onClick={extendList}>Add</button>
+            <ul>
+                {inputs.map((key, index) => (
+                    <li key={index}>
+                        <div className="pb-2">
+                            <input className="pl-2 text-black" type="text" name={"list-" + index} id={key} placeholder={key} />
+                        </div>
+                    </li>
+                ))}
+            </ul>
+            <br />
+            <button className="rounded-full outline p-2" onClick={extendList}>Add</button>
         </>
     )
 }
