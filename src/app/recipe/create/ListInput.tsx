@@ -23,7 +23,7 @@ export default function ListInput() {
                 ))}
             </ul>
             <br />
-            <button className="rounded-full outline p-2" onClick={extendList}>Add</button>
+            <button className="rounded-full outline p-2" type="button" onClick={extendList}>Add</button>
         </>
     )
 }

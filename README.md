@@ -27,4 +27,8 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## TODO
+
+- Create breadcrumb component for easier navigation
+- Work on styling / design
+- Simple lambda function back end

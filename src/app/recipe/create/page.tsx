@@ -29,7 +29,6 @@ export default function CreateRecipe() {
 
         // TODO: API Request to save recipe
         // On save -> Check status of request, trigger alert and go back to recipe list
-        console.log({ title, ingredients, method })
         router.push("/recipe")
         alertContext?.trigger(AlertType.Info, "Succesfully created new recipe!")
     }
