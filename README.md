@@ -8,10 +8,9 @@ This project is just getting started, so stay tuned for updates!
 
 ## Goals
 
-Dinner is always a stressful part of my night. Figuring out what to cook is always more complicated than it needs to be.
-My goals for this project is to create a way to simplify my dinner routine.
-
-I'd like to be able to save recipes and create weekly dinner plans in one easy to use app without ads!
+- Create / manage recipes
+- Organise weekly meal plans by picking recipes for the week
+- Export ingredients list
 
 ## Getting Started
 
