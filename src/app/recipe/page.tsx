@@ -1,21 +1,23 @@
-'use client'
+'use client';
 
-import Link from "next/link"
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { AddButton } from "@/components/recipe/AddButton";
-import RecipeCard from "@/components/recipe/RecipeCard";
+import { AddButton } from '@/components/recipe/AddButton';
+import RecipeCard from '@/components/recipe/RecipeCard';
 
 export default function Home() {
     // TODO: Get recipes from API to server
-    const currentPath = usePathname()
+    const currentPath = usePathname();
     return (
         <>
             <div className="flex flex-row items-center">
-                <div><h1 className="text-5xl">Recipes</h1></div>
+                <div className="text-center">
+                    <h1 className="text-5xl">Recipes</h1>
+                </div>
                 <div className="pl-8">
                     <Link href={`${currentPath}/create`}>
-                        <AddButton text="New" />
+                        <AddButton text="Create new" />
                     </Link>
                 </div>
             </div>

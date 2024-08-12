@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import { createContext, useState } from "react";
+import { createContext, useState } from 'react';
 
 export enum AlertType {
     Info = 1,
@@ -17,28 +17,28 @@ interface AlertValue {
 
 const AlertDurationSeconds = 4000;
 
-export const AlertContext = createContext<null | AlertValue>(null)
+export const AlertContext = createContext<null | AlertValue>(null);
 
 export const AlertContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const [alertState, setAlertState] = useState({ show: false, type: AlertType.Info, message: "" })
+    const [alertState, setAlertState] = useState({
+        show: false,
+        type: AlertType.Info,
+        message: ''
+    });
 
     const triggerAlert = (type: AlertType, message: string) => {
-        setAlertState({ show: true, type, message })
+        setAlertState({ show: true, type, message });
         setTimeout(() => {
-            setAlertState({ ...alertState, show: false })
-        }, AlertDurationSeconds)
-    }
+            setAlertState({ ...alertState, show: false });
+        }, AlertDurationSeconds);
+    };
 
     const value = {
         show: alertState.show,
         type: alertState.type,
         message: alertState.message,
-        trigger: triggerAlert,
-    }
+        trigger: triggerAlert
+    };
 
-    return (
-        <AlertContext.Provider value={value}>
-            {children}
-        </AlertContext.Provider>
-    )
-}
+    return <AlertContext.Provider value={value}>{children}</AlertContext.Provider>;
+};
