@@ -1,7 +1,7 @@
 Region: Sydney (ap-southeast-2)
-S3 Buckets:
-    - cook-book-serverless (for storing lambda function code) *Need to create first
-    - cook-book-recipes-store (for storing recipe JSON data) *Create using terraform configuration
+S3 Buckets (created in terraform config):
+    - cook-book-serverless (for storing lambda function code)
+    - cook-book-recipes-store (for storing recipe JSON data: Just a test for now)
 
 ## Commands
 ```bash
