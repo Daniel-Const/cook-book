@@ -23,9 +23,7 @@ export default function Page({ params }: { params: { id: string } }) {
     return (
         <div className="">
             <h1 className="text-6xl">{recipe.title}</h1>
-
             <p className="pt-10">{recipe.description}</p>
-
             <h2 className="text-4xl pt-10">Ingredients</h2>
             <ul className="p-4">
                 {recipe.ingredients.map((ingredient, i) => (

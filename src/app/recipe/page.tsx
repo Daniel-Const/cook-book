@@ -9,6 +9,7 @@ import RecipeCard from '@/components/recipe/RecipeCard';
 export default function Home() {
     // TODO: Get recipes from API to server
     const currentPath = usePathname();
+    
     return (
         <>
             <div className="flex flex-row items-center">

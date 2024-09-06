@@ -34,3 +34,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+*.tfstate
+*.tfstate.backup
+*.zip
+.terraform
+*.terraform*
+server/build/

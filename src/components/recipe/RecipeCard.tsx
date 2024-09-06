@@ -20,14 +20,14 @@ export default function RecipeCard({
   };
   return (
     <Link href={`${currentPath}/${id}`}>
-      <div className="outline grid grid-rows-3 grid-flow-col gap-4 p-4 m-4 hover:outline-blue-500">
+      <div className="bg-slate-200 rounded grid grid-rows-3 grid-flow-col gap-4 p-4 m-4 hover:bg-blue-500">
         <div className="row-span-3">
-          <h1>{title}</h1>
+          <h1 className="text-lg">{title}</h1>
           <p>{description}</p>
         </div>
-        <div className="row-span-3 col-span-1">
+        {/* <div className="row-span-3 col-span-1">
           <p>img goes here</p>
-        </div>
+        </div> */}
       </div>
     </Link>
   );

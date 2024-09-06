@@ -22,7 +22,8 @@ export default function Layout({
                 </div>
             </div>
 
-            <div className="flex justify-between py-2 bg-slate-200">
+            <div className="flex py-2 bg-slate-200">
+                <MenuButton link="/">Home</MenuButton>
                 <MenuButton link="/recipe">Recipes</MenuButton>
             </div>
 
