@@ -7,13 +7,16 @@ bucketName = os.environ.get('recipe_store')
 region = "ap-southeast-2"
 
 def lambda_handler(event, context):
-    # client = boto3.client("s3", region)
-    # response = client.put_object(
-    #    Bucket=bucketName, Key=str(uuid4()), Body=bytearray("Hello, World!", "utf-8")
-    # )
+    client = boto3.client("s3", region)
+    obj = client.get_object(
+        Bucket=bucketName, Key="recipes"
+    )
 
-    # return response
     return {
         'statusCode': 200,
-        'body': json.dumps('Hello lambda!') 
+        'body': obj['Body'].read().decode('utf-8')
     }
+
+
+if __name__ == '__main__':
+    lambda_handler(None, None)
