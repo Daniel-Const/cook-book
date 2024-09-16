@@ -1,5 +1,5 @@
 install:
-	python -m pip install --target ./build/ -r requirements.txt
+	python -m pip install --target ./build/ -r src/requirements.txt
 
 archive:
 	cp src/index.py build/

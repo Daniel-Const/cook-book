@@ -168,7 +168,6 @@ resource "aws_apigatewayv2_stage" "lambda" {
       }
     )
   }
-
 }
 
 resource "aws_apigatewayv2_integration" "create_recipe" {
@@ -182,7 +181,7 @@ resource "aws_apigatewayv2_integration" "create_recipe" {
 resource "aws_apigatewayv2_route" "create_recipe" {
   api_id = aws_apigatewayv2_api.lambda.id
 
-  route_key = "GET /hello"
+  route_key = "ANY /recipes"
   target    = "integrations/${aws_apigatewayv2_integration.create_recipe.id}"
 }
 
