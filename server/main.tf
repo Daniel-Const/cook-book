@@ -40,36 +40,44 @@ resource "aws_s3_object" "lambda_object" {
 
 
 # ---------------------
-# S3 bucket for storing recipes
+# DynamoDB table for storing recipe data 
 # ---------------------
-resource "random_pet" "recipe_bucket_name" {
-    prefix = "cook-book-recipes"
-    length = 4
-}
+resource "aws_dynamodb_table" "dynamodb_recipe_table" {
+  name           = "CookbookRecipes"
+  billing_mode   = "PROVISIONED"
+  read_capacity  = 10
+  write_capacity = 10
+  hash_key       = "RecipeId"
+  range_key      = "RecipeName"
 
-resource "aws_s3_bucket" "recipe_bucket" {
-    bucket = random_pet.recipe_bucket_name.id
-}
+  attribute {
+    name = "RecipeId"
+    type = "S"
+  }
 
-resource "aws_s3_bucket_ownership_controls" "recipe_bucket" {
-  bucket = aws_s3_bucket.recipe_bucket.id
-  rule {
-    object_ownership = "BucketOwnerPreferred"
+  attribute {
+    name = "RecipeName"
+    type = "S"
+  }
+
+  global_secondary_index {
+    name               = "RecipeNameIndex"
+    hash_key           = "RecipeName"
+    write_capacity     = 10
+    read_capacity      = 10
+    projection_type    = "ALL"
+  }
+
+  tags = {
+    Name        = "dynamodb-table-cookbook"
+    Environment = "production"
   }
 }
-
-resource "aws_s3_bucket_acl" "recipe_bucket" {
-  depends_on = [aws_s3_bucket_ownership_controls.recipe_bucket]
-
-  bucket = aws_s3_bucket.recipe_bucket.id
-  acl    = "private"
-}
-
 
 # ---------------------
 # Package into zip and copy function to S3
 # ---------------------
- data "archive_file" "lambda_object" {
+data "archive_file" "lambda_object" {
   type = "zip"
 
   source_dir  = "${path.module}/build"
@@ -94,11 +102,11 @@ resource "aws_lambda_function" "create_recipe" {
 
   role = aws_iam_role.lambda_exec.arn
 
-  timeout = 10 
+  timeout = 10
 
   environment {
     variables = {
-        recipe_store = aws_s3_bucket.recipe_bucket.id
+        dynamodb_table_name = aws_dynamodb_table.dynamodb_recipe_table.name
     }
   }
 }
@@ -133,7 +141,7 @@ resource "aws_iam_role_policy_attachment" "lambda_policy_exe" {
 
 resource "aws_iam_role_policy_attachment" "lambda_policy_s3" {
   role       = aws_iam_role.lambda_exec.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess"
 }
 
 

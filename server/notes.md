@@ -1,12 +1,17 @@
 Region: Sydney (ap-southeast-2)
 S3 Buckets (created in terraform config):
-    - cook-book-serverless (for storing lambda function code)
     - cook-book-recipes-store (for storing recipe JSON data: Just a test for now)
+
+DynamoDB
+    - Store / retrieve recipe data
 
 ## Commands
 ```bash
 # Install pip dependencies to build dir
 > make install
+
+# Build archive file and deploy infrastructure
+> make deploy
 
 # Copy src code to build dir
 > make archive
