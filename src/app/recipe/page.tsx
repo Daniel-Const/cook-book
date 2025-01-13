@@ -18,7 +18,7 @@ export default function Home() {
                 </div>
                 <div className="pl-8">
                     <Link href={`${currentPath}/create`}>
-                        <AddButton text="Create new" />
+                        <button className="bg-blue-500 hover:bg-blue-300 rounded-full p-2">Add Recipe</button>
                     </Link>
                 </div>
             </div>
