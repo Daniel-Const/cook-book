@@ -18,7 +18,8 @@ async function main() {
     const pennePestoRecipe = await prisma.recipe.create({
         data: {
             name: 'Penne & Pesto',
-            description: 'Pasta with pesto sauce'
+            description: 'Beautiful penne pasta with pesto sauce - quick and easy!',
+            method: 'Boil pasta||Open pesto jar||Mix pesto sauce into pasta||Enjoy!'
         }
     });
 

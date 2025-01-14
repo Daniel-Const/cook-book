@@ -30,12 +30,11 @@ export default function RootLayout({
         <html lang="en">
             {/* <body className={inter.className}> */}
             <body className={roboto.variable}>
-
                 <AppRouterCacheProvider>
                     <ThemeProvider theme={theme}>
-                    <AlertContextProvider>
-                        <Layout>{children}</Layout>
-                    </AlertContextProvider>
+                        <AlertContextProvider>
+                            <Layout>{children}</Layout>
+                        </AlertContextProvider>
                     </ThemeProvider>
                 </AppRouterCacheProvider>
             </body>

@@ -10,7 +10,8 @@ datasource db {
 model Recipe {
   id          Int                @id @default(autoincrement())
   name        String             @unique
-  description String?
+  description String
+  method      String
   ingredients RecipeIngredient[]
 }
 
