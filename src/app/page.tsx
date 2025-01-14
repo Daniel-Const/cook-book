@@ -1,4 +1,4 @@
-import DashboardCard from "@/components/dashboard/dashboardCard";
+import DashboardCard from '@/components/dashboard/dashboardCard';
 
 export default function Home() {
     return (
