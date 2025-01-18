@@ -3,7 +3,7 @@
 import { FormEvent, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 
-import ListInput from './ListInput';
+import ListInput from '../../../components/recipe/IngredientList';
 import { AlertContext, AlertType } from '@/context/AlertContext';
 import { Box, Card, CardContent, Typography } from '@mui/material';
 

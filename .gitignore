@@ -42,3 +42,7 @@ next-env.d.ts
 *.terraform*
 server/build/
 *.venv
+
+
+# database files
+prisma/*.db
