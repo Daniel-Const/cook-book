@@ -3,9 +3,9 @@
 import { FormEvent, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 
-import ListInput from '../../../components/recipe/IngredientList';
 import { AlertContext, AlertType } from '@/context/AlertContext';
 import { Box, Card, CardContent, Typography } from '@mui/material';
+import IngredientList from '../../../components/recipe/IngredientList';
 
 export default function CreateRecipe() {
     const router = useRouter();
@@ -66,7 +66,7 @@ export default function CreateRecipe() {
                                 >
                                     Ingredients
                                 </Typography>
-                                <ListInput />
+                                <IngredientList ingredients={[]} />
                             </div>
                             <div className="ml-8">
                                 <Typography

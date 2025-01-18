@@ -2,14 +2,27 @@ import { AddButton } from '@/components/recipe/AddButton';
 import { ChangeEvent, MouseEventHandler, useState } from 'react';
 import { Delete } from '@mui/icons-material';
 import { Add } from '@mui/icons-material';
+import { IngredientData } from '@/pages/api/recipe';
 
-interface Ingredient {
+export interface Ingredient {
     name: string;
     quantity: string;
+    id?: number;
 }
 
-export default function ListInput() {
-    const [inputs, setInputs] = useState<Ingredient[]>([{ name: '', quantity: '' }]);
+export default function IngredientList({
+    ingredients,
+    onChange
+}: {
+    ingredients: Ingredient[];
+    onChange: (ingredients: Ingredient[]) => void;
+}) {
+    const [inputs, _setInputs] = useState<Ingredient[]>(ingredients);
+
+    const setInputs = (ingredients: Ingredient[]) => {
+        _setInputs(ingredients);
+        onChange(ingredients);
+    };
 
     function extendList() {
         setInputs([...inputs, { name: '', quantity: '' }]);
@@ -61,27 +74,25 @@ export default function ListInput() {
                                 }
                                 placeholder="Quantity"
                             />
-                            {index == inputs.length - 1 ? (
-                                <button
-                                    type="button"
-                                    className="text-white pl-3 pr-3 pt-2 pb-2 bg-blue-500 hover:bg-blue-300 rounded-full"
-                                    onClick={extendList}
-                                >
-                                    <Add></Add>
-                                </button>
-                            ) : (
-                                <button
-                                    type="button"
-                                    className="text-white pl-3 pr-3 pt-2 pb-2 bg-red-500 hover:bg-red-300 rounded-full"
-                                    onClick={() => deleteAtIndex(index)}
-                                >
-                                    <Delete></Delete>
-                                </button>
-                            )}
+
+                            <button
+                                type="button"
+                                className="text-white pl-3 pr-3 pt-2 pb-2 bg-red-500 hover:bg-red-300 rounded-full"
+                                onClick={() => deleteAtIndex(index)}
+                            >
+                                <Delete></Delete>
+                            </button>
                         </div>
                     </li>
                 ))}
             </ul>
+            <button
+                type="button"
+                className="text-white pl-3 pr-3 pt-2 pb-2 bg-blue-500 hover:bg-blue-300 rounded-full"
+                onClick={extendList}
+            >
+                <Add></Add>
+            </button>
             <br />
         </>
     );

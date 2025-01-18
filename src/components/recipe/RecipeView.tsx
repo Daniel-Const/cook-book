@@ -4,41 +4,37 @@
  * Recipe page
  */
 
-import { getRecipeById, RecipeData } from '@/pages/api/recipe';
-import { Box, Card, CardContent, CardHeader, Typography } from '@mui/material';
+import { RecipeData } from '@/pages/api/recipe';
+import { Button, Card, CardContent, CardHeader, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import { useState } from 'react';
 
-export default function RecipeView({ recipe }: { recipe: RecipeData }) {
-    const [isEditing, setIsEditing] = useState(false);
-
-    const editButtonIsEditing =
-        'text-white pl-3 pr-3 pt-2 pb-2 rounded-full bg-green-500 hover:bg-green-300';
-    const editButtonIsNotEditing =
-        'text-white pl-3 pr-3 pt-2 pb-2 rounded-full bg-blue-500 hover:bg-blue-300';
-
+export default function RecipeView({
+    recipe,
+    setIsEditing
+}: {
+    recipe: RecipeData;
+    setIsEditing: (value: boolean) => void;
+}) {
     return (
         <div className="">
             <div className="flex flex-row">
-                <h1 className="text-6xl text-center">{recipe.name}</h1>
-                <p>{isEditing}</p>
-                <div className="flex flex-col items-center justify-center ml-8">
-                    <button
-                        type="button"
-                        className={
-                            isEditing ? editButtonIsEditing : editButtonIsNotEditing
-                        }
-                        onClick={() => {
-                            setIsEditing(!isEditing);
-                        }}
-                    >
-                        <EditIcon></EditIcon>
-                    </button>
+                <div className="flex flex-row">
+                    <h1 className="text-6xl text-center">{recipe.name}</h1>
                 </div>
+                <Button
+                    type="button"
+                    className="text-white pl-3 pr-3 pt-2 pb-2 rounded-full bg-blue-500 hover:bg-blue-300"
+                    onClick={() => {
+                        setIsEditing(true);
+                    }}
+                >
+                    <EditIcon></EditIcon>
+                </Button>
             </div>
             <Typography component="p" variant="h5" color="white" pt="1em" pb="1em">
                 {recipe.description}
             </Typography>
+
             <Card style={{ backgroundColor: '#475569' }}>
                 <CardHeader title="Ingredients" style={{ color: '#ffffff' }}></CardHeader>
                 <CardContent>

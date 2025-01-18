@@ -3,17 +3,22 @@
  */
 
 import { getRecipeById } from '@/pages/api/recipe';
-import RecipeView from '@/components/recipe/RecipeView';
+import Recipe from './Recipe';
 
 export default async function Page({ params }: { params: { id: string } }) {
-    const recipe = await getRecipeById(Number(params.id));
+    const fetchRecipe = async (id: number) => {
+        return await getRecipeById(id);
+    };
+
+    let recipe = await fetchRecipe(Number(params.id));
+
     if (!recipe) {
         return <h1 className="text-2xl">Error! Recipe not found...</h1>;
     }
 
     return (
         <div className="">
-            <RecipeView recipe={recipe}></RecipeView>
+            <Recipe recipe={recipe}></Recipe>
         </div>
     );
 }

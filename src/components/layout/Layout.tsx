@@ -6,7 +6,7 @@ export default function Layout({
     showBack = true
 }: Readonly<{ children: React.ReactNode; showBack?: boolean }>) {
     return (
-        <div>
+        <div className="bg-gray-900">
             <div className="flex">
                 <div className="absolute top-0 right-0 mt-8 mr-8 flex mx-auto items-center">
                     <Alert />
