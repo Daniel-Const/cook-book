@@ -1,19 +1,53 @@
+import { useParams } from "react-router-dom";
 import RecipeView from "../components/RecipeView";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@mui/material";
+
+export interface RecipeObject {
+  id: number;
+  name: string;
+  method: string[];
+  ingredients: {
+    id: number;
+    name: string;
+    quantity: string;
+  }[];
+}
 
 const Recipe = () => {
-  // const setIsEditing = (value: boolean) => {};
+  const params = useParams();
+  const id = params.id;
 
-  const recipe = {
-    id: "123",
-    name: "Penne Pesto",
-    description: "yummy penne pesto woohoo!",
-    ingredients: [{ name: "Spaghetti", quantity: "1 packet" }],
-    method: ["Put the pasta in the pot", "boil the pasta", "add the sauce"],
-  };
+  const [recipe, setRecipe] = useState<RecipeObject | null>(null);
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/recipe/${id}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((recipe: RecipeObject) => setRecipe(recipe))
+      .catch((err) => {
+        console.error(err);
+        setNotFound(true);
+      });
+  }, []);
+
+  if (notFound) {
+    return (
+      <>
+        <h2>Recipe does not exist...</h2>
+      </>
+    );
+  }
 
   return (
     <>
-      <RecipeView recipe={recipe} />
+      {recipe ? (
+        <RecipeView recipe={recipe} />
+      ) : (
+        <Skeleton variant="rectangular" width={210} height={118} />
+      )}
     </>
   );
 };

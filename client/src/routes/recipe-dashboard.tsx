@@ -1,34 +1,40 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import { RecipeCard } from "../components/RecipeCard";
 import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { RecipeObject } from "./recipe";
 
 const RecipeDashboard = () => {
-  const recipes = [
-    {
-      id: "123",
-      name: "penne pesto",
-      description: "yummy penne pesto woohoo!",
-    },
-    {
-      id: "323",
-      name: "Spaghetti",
-      description: "A classic! Quick and easy",
-    },
-  ];
+  const [recipeList, setRecipeList] = useState<RecipeObject[]>([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/recipe`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((recipeList: any) => setRecipeList(recipeList))
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <>
       <Typography variant="h2" component="h1">
         Recipes
       </Typography>
-      <Box width="100%" maxWidth="60%" mt="2em">
-        {recipes.map((recipe) => (
-          <Box pb="1em" key={recipe.id}>
-            <NavLink to={`${recipe.id}`}>
-              <RecipeCard recipe={recipe} />
-            </NavLink>
-          </Box>
-        ))}
+      <Box width="100%" maxWidth="800px" mt="2em">
+        {recipeList.length > 0 ? (
+          recipeList.map((recipe) => (
+            <Box pb="1em" key={recipe.id}>
+              <NavLink to={`${recipe.id}`}>
+                <RecipeCard recipe={recipe} />
+              </NavLink>
+            </Box>
+          ))
+        ) : (
+          <Skeleton variant="rectangular" width={320} height={118} />
+        )}
       </Box>
     </>
   );
