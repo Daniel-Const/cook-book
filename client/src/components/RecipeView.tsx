@@ -34,35 +34,48 @@ const RecipeView = ({ recipe }: { recipe: any }) => {
         {recipe.description}
       </Typography>
 
-      <Card style={{ backgroundColor: "#475569", minWidth: "30%" }}>
-        <CardHeader
-          title="Ingredients"
-          style={{ color: "#ffffff" }}
-        ></CardHeader>
-        <CardContent>
-          <List sx={{ color: "white" }}>
-            {recipe.ingredients.map((ingredient: any, i: number) => (
-              <ListItem key={`ingredient-${i}`}>
-                {ingredient.name}: {ingredient.quantity}
-              </ListItem>
-            ))}
-          </List>
-        </CardContent>
-      </Card>
+      <Box sx={{ display: "flex", flexDirection: "column", minWidth: "40%" }}>
+        <Card
+          sx={{ backgroundColor: "#475569", marginTop: "2em", padding: "1em" }}
+        >
+          <CardHeader
+            title="Ingredients"
+            style={{ color: "#ffffff" }}
+          ></CardHeader>
+          <CardContent>
+            <List sx={{ color: "white" }}>
+              {recipe.ingredients.map((ingredient: any, i: number) => (
+                <ListItem key={`ingredient-${i}`}>
+                  <Typography fontSize={"1.2em"}>
+                    {ingredient.name}: {ingredient.quantity}
+                  </Typography>
+                </ListItem>
+              ))}
+            </List>
+          </CardContent>
+        </Card>
 
-      <Card
-        style={{ backgroundColor: "#475569", minWidth: "30%" }}
-        className="mt-8"
-      >
-        <CardHeader style={{ color: "#ffffff" }} title="Steps"></CardHeader>
-        <CardContent>
-          <List sx={{ color: "white" }}>
-            {recipe.method.map((step: string, i: number) => (
-              <ListItem key={`steps-${i}`}>{step}</ListItem>
-            ))}
-          </List>
-        </CardContent>
-      </Card>
+        <Card
+          sx={{ backgroundColor: "#475569", marginTop: "2em", padding: "1em" }}
+        >
+          <CardHeader style={{ color: "#ffffff" }} title="Steps"></CardHeader>
+          <CardContent>
+            <List
+              sx={{
+                listStyle: "upper-roman",
+                color: "white",
+                paddingX: "1em",
+              }}
+            >
+              {recipe.method.map((step: string, i: number) => (
+                <ListItem sx={{ display: "list-item" }} key={`steps-${i}`}>
+                  <Typography fontSize={"1.2em"}>{step}</Typography>
+                </ListItem>
+              ))}
+            </List>
+          </CardContent>
+        </Card>
+      </Box>
     </>
   );
 };

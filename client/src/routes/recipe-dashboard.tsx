@@ -27,13 +27,13 @@ const RecipeDashboard = () => {
         {recipeList.length > 0 ? (
           recipeList.map((recipe) => (
             <Box pb="1em" key={recipe.id}>
-              <NavLink to={`${recipe.id}`}>
+              <NavLink to={`${recipe.id}`} style={{ textDecoration: "none" }}>
                 <RecipeCard recipe={recipe} />
               </NavLink>
             </Box>
           ))
         ) : (
-          <Skeleton variant="rectangular" width={320} height={118} />
+          <Skeleton variant="rectangular" height="200" />
         )}
       </Box>
     </>

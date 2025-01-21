@@ -1,11 +1,20 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
   return (
     <>
-      <Box className="flex flex-col items-center place-items-center">
-        <h1 className="text-5xl">Cook Book</h1>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          placeItems: "center",
+        }}
+      >
+        <Typography component="h1" variant="h2">
+          Cook Book
+        </Typography>
         {/* Main Dashboard */}
         <NavLink to="/recipes">
           <Box mt="2em">

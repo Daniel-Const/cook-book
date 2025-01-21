@@ -14,33 +14,45 @@ export default function Layout() {
         </div>
       </div>
 
-      {/* Top bar items */}
-      <Box py="1em" bgcolor="#0d1321">
-        <NavLink to="/">
-          <Button>Home</Button>
-        </NavLink>
-        <NavLink to="/">
-          <Button>Recipes</Button>
-        </NavLink>
-      </Box>
+      <main>
+        {/* Top bar items */}
+        <Box py="1em" bgcolor="#0d1321" textAlign={"center"}>
+          <NavLink to="/">
+            <Button>Home</Button>
+          </NavLink>
+          <NavLink to="/recipes">
+            <Button>Recipes</Button>
+          </NavLink>
+        </Box>
 
-      <main className="flex min-h-screen flex-col items-center mt-8">
-        {location.pathname !== "/" ? (
-          <Box
-            sx={{ position: "fixed", top: "5em", left: "4em", zIndex: 9999 }}
-          >
-            <Button
-              variant="contained"
-              onClick={() => navigate(-1)}
-              sx={{ borderRadius: 8 }}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            minHeight: "100vh",
+            alignItems: "center",
+            backgroundColor: "#373847",
+            // marginTop: "2em",
+            paddingTop: "2em",
+          }}
+        >
+          {location.pathname !== "/" ? (
+            <Box
+              sx={{ position: "fixed", top: "6em", left: "4em", zIndex: 9999 }}
             >
-              <ArrowBack />
-            </Button>
-          </Box>
-        ) : (
-          ""
-        )}
-        <Outlet />
+              <Button
+                variant="contained"
+                onClick={() => navigate(-1)}
+                sx={{ borderRadius: 8 }}
+              >
+                <ArrowBack />
+              </Button>
+            </Box>
+          ) : (
+            ""
+          )}
+          <Outlet />
+        </Box>
       </main>
     </div>
   );
