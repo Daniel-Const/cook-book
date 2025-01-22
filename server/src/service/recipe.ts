@@ -1,6 +1,5 @@
-import { Ingredient, Recipe, RecipeIngredient } from "@prisma/client";
 
-const { PrismaClient } = require("@prisma/client");
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -34,7 +33,8 @@ interface RecipeResponse {
   ingredients?: RecipeIngredientResponse[];
 }
 
-const mapRecipe = (recipe: RecipeQueryObject) => {
+const mapRecipe = (recipe: RecipeQueryObject | null) => {
+  if (!recipe) return null;
   const mappedRecipe: RecipeResponse = {
     ...recipe,
     method: recipe.method.split("||"),
@@ -78,4 +78,51 @@ export const getRecipeById = async (id: string) => {
   });
   console.log(recipe);
   return mapRecipe(recipe);
+};
+
+export const createRecipe = async (name: string, description: string) => {
+  try {
+    const recipe = await prisma.recipe.create({
+      data: {
+        name,
+        description,
+        method: "",
+      },
+    });
+    return recipe.id;
+  } catch (e) {
+    return null;
+  }
+};
+
+export const updateRecipe = async (recipe: RecipeResponse) => {
+  console.log(recipe.ingredients);
+  const response = await prisma.recipe.update({
+    data: {
+      name: recipe.name,
+      description: recipe.description,
+      method: recipe.method.join("||"),
+    },
+    where: { id: recipe.id },
+  });
+
+  // TODO: update the ingredients too in one go ??
+
+  if (recipe.ingredients) {
+    // Delete all recipe ingredients
+    await prisma.recipeIngredient.deleteMany({
+      where: { recipeId: recipe.id },
+    });
+
+    // Add new recipe ingredients
+    await prisma.recipeIngredient.createMany({
+      data: recipe.ingredients.map((ingredient) => ({
+        ingredientId: ingredient.id,
+        recipeId: recipe.id,
+        quantity: ingredient.quantity,
+      })),
+    });
+  }
+
+  return response;
 };

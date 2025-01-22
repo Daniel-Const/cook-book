@@ -1,15 +1,15 @@
-import { Box, Button, Typography } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Box, Button, Typography } from '@mui/material'
+import { NavLink } from 'react-router-dom'
 
 const Home = () => {
   return (
     <>
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          placeItems: "center",
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          placeItems: 'center',
         }}
       >
         <Typography component="h1" variant="h2">
@@ -25,7 +25,7 @@ const Home = () => {
         </NavLink>
       </Box>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

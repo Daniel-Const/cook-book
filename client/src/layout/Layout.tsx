@@ -1,10 +1,10 @@
-import { ArrowBack } from "@mui/icons-material";
-import { Box, Button } from "@mui/material";
-import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
+import { ArrowBack } from '@mui/icons-material'
+import { Box, Button } from '@mui/material'
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 export default function Layout() {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate = useNavigate()
+  const location = useLocation()
 
   return (
     <div className="bg-gray-900">
@@ -16,7 +16,7 @@ export default function Layout() {
 
       <main>
         {/* Top bar items */}
-        <Box py="1em" bgcolor="#0d1321" textAlign={"center"}>
+        <Box py="1em" bgcolor="#0d1321" textAlign={'center'}>
           <NavLink to="/">
             <Button>Home</Button>
           </NavLink>
@@ -27,18 +27,18 @@ export default function Layout() {
 
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            minHeight: "100vh",
-            alignItems: "center",
-            backgroundColor: "#373847",
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh',
+            alignItems: 'center',
+            backgroundColor: '#373847',
             // marginTop: "2em",
-            paddingTop: "2em",
+            paddingTop: '2em',
           }}
         >
-          {location.pathname !== "/" ? (
+          {location.pathname !== '/' ? (
             <Box
-              sx={{ position: "fixed", top: "6em", left: "4em", zIndex: 9999 }}
+              sx={{ position: 'fixed', top: '6em', left: '4em', zIndex: 9999 }}
             >
               <Button
                 variant="contained"
@@ -49,11 +49,11 @@ export default function Layout() {
               </Button>
             </Box>
           ) : (
-            ""
+            ''
           )}
           <Outlet />
         </Box>
       </main>
     </div>
-  );
+  )
 }
