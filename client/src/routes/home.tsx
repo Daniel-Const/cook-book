@@ -1,5 +1,5 @@
-import { Box, Button, Typography } from '@mui/material'
-import { NavLink } from 'react-router-dom'
+import { Box, Typography } from '@mui/material'
+import { HomeMenuOption } from '../components/HomeMenuOption'
 
 const Home = () => {
   return (
@@ -12,17 +12,19 @@ const Home = () => {
           placeItems: 'center',
         }}
       >
-        <Typography component="h1" variant="h2">
+        <Typography component="h1" variant="h1">
           Cook Book
         </Typography>
         {/* Main Dashboard */}
-        <NavLink to="/recipes">
-          <Box mt="2em">
-            <Button variant="contained">
-              <h2>Recipes</h2>
-            </Button>
+        <Box mt="6em" width={'600px'}>
+          <Box py="1em">
+            <HomeMenuOption text="Recipes" to="/recipes" />
           </Box>
-        </NavLink>
+          {/* TODO */}
+          {/* <Box py="1em">
+            <HomeMenuOption text="Ingredients" to="/recipes" />
+          </Box> */}
+        </Box>
       </Box>
     </>
   )

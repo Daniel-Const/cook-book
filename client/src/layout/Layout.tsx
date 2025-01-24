@@ -7,8 +7,8 @@ export default function Layout() {
   const location = useLocation()
 
   return (
-    <div className="bg-gray-900">
-      <div className="flex">
+    <div>
+      <div>
         <div className="absolute top-0 right-0 mt-8 mr-8 flex mx-auto items-center">
           {/* <Alert /> */}
         </div>
@@ -16,12 +16,14 @@ export default function Layout() {
 
       <main>
         {/* Top bar items */}
-        <Box py="1em" bgcolor="#0d1321" textAlign={'center'}>
+        <Box py="1em" bgcolor="#314759" textAlign={'center'}>
           <NavLink to="/">
-            <Button>Home</Button>
+            <Button variant="text">Home</Button>
           </NavLink>
           <NavLink to="/recipes">
-            <Button>Recipes</Button>
+            <Button variant="text" color="primary" sx={{ ml: '0.5em' }}>
+              Recipes
+            </Button>
           </NavLink>
         </Box>
 
@@ -31,7 +33,7 @@ export default function Layout() {
             flexDirection: 'column',
             minHeight: '100vh',
             alignItems: 'center',
-            backgroundColor: '#373847',
+            backgroundColor: '#292d33',
             // marginTop: "2em",
             paddingTop: '2em',
           }}
