@@ -1,4 +1,3 @@
-
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -76,7 +75,6 @@ export const getRecipeById = async (id: string) => {
       },
     },
   });
-  console.log(recipe);
   return mapRecipe(recipe);
 };
 
@@ -96,7 +94,6 @@ export const createRecipe = async (name: string, description: string) => {
 };
 
 export const updateRecipe = async (recipe: RecipeResponse) => {
-  console.log(recipe.ingredients);
   const response = await prisma.recipe.update({
     data: {
       name: recipe.name,
@@ -105,8 +102,6 @@ export const updateRecipe = async (recipe: RecipeResponse) => {
     },
     where: { id: recipe.id },
   });
-
-  // TODO: update the ingredients too in one go ??
 
   if (recipe.ingredients) {
     // Delete all recipe ingredients

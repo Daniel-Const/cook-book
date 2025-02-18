@@ -14,7 +14,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
-import api, { IngredientObject, RecipeObject } from '../api'
+import api, { Ingredient, IngredientObject, RecipeObject } from '../api'
 import { IngredientChip } from './IngredientChip'
 
 export const RecipeEdit = ({
@@ -29,11 +29,12 @@ export const RecipeEdit = ({
   const [method, setMethod] = useState(recipe.method)
 
   const [ingredientValue, setIngredientValue] = useState<any>('')
-  const [ingredientOptions, setIngredientOptions] = useState<
-    IngredientObject[]
-  >([])
+  const [ingredientOptions, setIngredientOptions] = useState<Ingredient[]>([])
   const [ingredientQuantity, setIngredientQuantity] = useState('')
   const [ingredients, setIngredients] = useState(recipe.ingredients)
+
+  const [showSavingIngredientText, setShowSavingIngredientText] =
+    useState(false)
 
   useEffect(() => {
     api.getAllIngredients().then((ingredients) => {
@@ -41,17 +42,23 @@ export const RecipeEdit = ({
     })
   }, [])
 
-  const saveIngredientOption = () => {
-    // TODO: Implement creating new ingredient
-    let newIngredient = { id: 1, name: 'potato', quantity: '100g' }
+  const saveIngredientOption = async () => {
+    let newIngredient: IngredientObject = {
+      id: -1,
+      name: ingredientValue,
+      quantity: ingredientQuantity,
+    }
     const existing = ingredientOptions.find(
-      (o: IngredientObject) => o.name === ingredientValue
+      (o: Ingredient) => o.name === ingredientValue
     )
-    if (!existing) {
-      // Create new ingredient...
+
+    if (existing) {
+      newIngredient.id = existing.id
     } else {
-      console.log('using existing', existing)
-      newIngredient = existing
+      setShowSavingIngredientText(true)
+      const ingredient = await api.createIngredient(ingredientValue)
+      newIngredient.id = ingredient.id
+      setShowSavingIngredientText(false)
     }
 
     setIngredients([
@@ -136,7 +143,7 @@ export const RecipeEdit = ({
                     options={ingredientOptions}
                     freeSolo
                     sx={{ width: 250 }}
-                    getOptionLabel={(option: IngredientObject | string) => {
+                    getOptionLabel={(option: Ingredient | string) => {
                       if (typeof option === 'object') return option.name
                       return option
                     }}
@@ -169,6 +176,12 @@ export const RecipeEdit = ({
                     <AddIcon></AddIcon>
                   </Button>
                 </Box>
+
+                {showSavingIngredientText ? (
+                  <p>Saving new ingredient...</p>
+                ) : (
+                  ''
+                )}
 
                 <Stack
                   width="600px"

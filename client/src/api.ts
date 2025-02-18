@@ -1,3 +1,8 @@
+export interface Ingredient {
+  id: number
+  name: string
+}
+
 export interface IngredientObject {
   id: number
   name: string
@@ -50,10 +55,20 @@ const getAllRecipes = async (): Promise<Partial<RecipeObject>[]> => {
   return response
 }
 
-const getAllIngredients = async (): Promise<IngredientObject[]> => {
+const getAllIngredients = async (): Promise<Ingredient[]> => {
   const response = await fetch(`${BASE_URL}/ingredient`).then((res) =>
     res.json()
   )
+  return response
+}
+
+const createIngredient = async (name: string): Promise<Ingredient> => {
+  const response = await fetch(`${BASE_URL}/ingredient`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({name}),
+  }).then((res) => res.json())
+
   return response
 }
 
@@ -63,4 +78,5 @@ export default {
   getRecipeById,
   updateRecipe,
   getAllIngredients,
+  createIngredient
 }

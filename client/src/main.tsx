@@ -15,6 +15,7 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
 import { theme } from './theme.ts'
+import Ingredients from './routes/ingredients.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/" element={<Home />} />
             <Route path="recipes" element={<RecipeDashboard />} />
             <Route path="recipes/:id" element={<Recipe />} />
+            <Route path="ingredients" element={<Ingredients />} />
           </Route>
         </Routes>
       </BrowserRouter>

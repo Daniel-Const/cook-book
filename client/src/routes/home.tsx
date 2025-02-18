@@ -21,9 +21,9 @@ const Home = () => {
             <HomeMenuOption text="Recipes" to="/recipes" />
           </Box>
           {/* TODO */}
-          {/* <Box py="1em">
-            <HomeMenuOption text="Ingredients" to="/recipes" />
-          </Box> */}
+          <Box py="1em">
+            <HomeMenuOption text="Ingredients" to="/ingredients" />
+          </Box>
         </Box>
       </Box>
     </>
